@@ -130,7 +130,7 @@ NSString *const kMagicalRecordImportAttributeUseDefaultValueWhenNotPresent = @"u
 }
 - (void)MR_setAttribute:(NSAttributeDescription *)attributeInfo withValueFromObject:(id)objectData
 {
-    BOOL shouldExcludeFromImport = [[[attributeInfo userInfo] objectForKey:kMagicalRecordImportExcludeFromImportKey] isEqualToString:@"YES"];
+    BOOL shouldExcludeFromImport = [[[attributeInfo userInfo] objectForKey:kMagicalRecordImportExcludeFromImportKey] boolValue];
     if (shouldExcludeFromImport)
     {
         return;
