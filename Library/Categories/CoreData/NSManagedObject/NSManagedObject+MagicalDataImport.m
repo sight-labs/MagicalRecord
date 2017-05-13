@@ -44,7 +44,7 @@ NSString *const kMagicalRecordImportAttributeUseDefaultValueWhenNotPresent = @"u
         [invocation setArgument:&value atIndex:2];
         [invocation invoke];
 
-        BOOL returnValue = YES;
+        BOOL * __unsafe_unretained returnValue = YES;
         [invocation getReturnValue:&returnValue];
         return returnValue;
     }
@@ -81,7 +81,7 @@ NSString *const kMagicalRecordImportAttributeUseDefaultValueWhenNotPresent = @"u
 #pragma clang diagnostic pop
     NSAssert1([[destinationEntity name] length], @"entity on relationship %@ is not valid", [relationshipInfo name]);
     NSAssert2([[relatedObject entity] isKindOfEntity:destinationEntity], @"related object entity %@ not similar to destination entity %@", [relatedObject entity], [relationshipInfo destinationEntity]);
-    
+
     //add related object to set
     NSString *addRelationMessageFormat = @"set%@:";
     id relationshipSource = self;
@@ -96,7 +96,7 @@ NSString *const kMagicalRecordImportAttributeUseDefaultValueWhenNotPresent = @"u
             NSInvocation *invocation = [NSInvocation invocationWithMethodSignature:[self methodSignatureForSelector:selector]];
             [invocation setSelector:selector];
             [invocation invokeWithTarget:self];
-            
+
             __unsafe_unretained id orderedSet;
             [invocation getReturnValue:&orderedSet];
             relationshipSource = orderedSet;
@@ -130,7 +130,7 @@ NSString *const kMagicalRecordImportAttributeUseDefaultValueWhenNotPresent = @"u
 }
 - (void)MR_setAttribute:(NSAttributeDescription *)attributeInfo withValueFromObject:(id)objectData
 {
-    BOOL shouldExcludeFromImport = [[[attributeInfo userInfo] objectForKey:kMagicalRecordImportExcludeFromImportKey] isEqualToString:@"YES"];
+    BOOL shouldExcludeFromImport = [[[attributeInfo userInfo] objectForKey:kMagicalRecordImportExcludeFromImportKey] boolValue];
     if (shouldExcludeFromImport)
     {
         return;
@@ -296,8 +296,8 @@ NSString *const kMagicalRecordImportAttributeUseDefaultValueWhenNotPresent = @"u
 
 				if (relatedByAtribute == nil || [relatedByAtribute length] == 0) {
             relatedByAtribute = [[destinationEntity MR_primaryAttribute] name];
-        }       
-				
+        }
+
         if ([relatedByAtribute length])
         {
             objectForRelationship = [managedObjectClass MR_findFirstByAttribute:relatedByAtribute
