@@ -136,8 +136,6 @@
 + (NSManagedObjectContext *)context NS_RETURNS_RETAINED;
 + (NSManagedObjectContext *)mainQueueContext;
 + (NSManagedObjectContext *)privateQueueContext;
-+ (NSManagedObjectContext *)confinementContext;
-+ (NSManagedObjectContext *)confinementContextWithParent:(NSManagedObjectContext *)parentContext;
 + (NSManagedObjectContext *)privateQueueContextWithStoreCoordinator:(NSPersistentStoreCoordinator *)coordinator NS_RETURNS_RETAINED;
 - (NSString *)parentChain;
 - (void)setWorkingName:(NSString *)workingName;

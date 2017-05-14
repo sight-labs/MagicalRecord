@@ -401,16 +401,6 @@
     return [self MR_privateQueueContext];
 }
 
-+ (NSManagedObjectContext *)confinementContext
-{
-    return [self MR_confinementContext];
-}
-
-+ (NSManagedObjectContext *)confinementContextWithParent:(NSManagedObjectContext *)parentContext
-{
-    return [self MR_confinementContextWithParent:parentContext];
-}
-
 + (NSManagedObjectContext *)privateQueueContextWithStoreCoordinator:(NSPersistentStoreCoordinator *)coordinator
 {
     return [self MR_privateQueueContextWithStoreCoordinator:coordinator];
